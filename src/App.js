@@ -7,13 +7,12 @@ export function replaceCamelWithSpaces(colorName) {
 function App() {
   const [color, setColor] = React.useState('MediumVioletRed')
   const [disabled, setDisabled] = React.useState(false)
-  const newColor =
-    color === 'MediumVioletRed' ? 'MidnightBlue' : 'MediumVioletRed'
+  const newColor = color === 'MediumVioletRed' ? 'MidnightBlue' : 'MediumVioletRed'
 
   return (
     <div>
       <button
-        style={{backgroundColor: disabled ? 'grey' : color}}
+        style={{ backgroundColor: disabled ? 'grey' : color }}
         onClick={() => setColor(newColor)}
         disabled={disabled}
       >

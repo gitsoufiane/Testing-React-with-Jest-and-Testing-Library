@@ -1,5 +1,5 @@
-import {render, screen, fireEvent} from '@testing-library/react'
-import App, {replaceCamelWithSpaces} from '../App'
+import { render, screen, fireEvent } from '@testing-library/react'
+import App, { replaceCamelWithSpaces } from '../App'
 
 test('button has correct initial color', () => {
   render(<App />)
@@ -7,22 +7,26 @@ test('button has correct initial color', () => {
     name: /change to Midnight Blue/i,
   })
   expect(button).toBeInTheDocument()
-  expect(button).toHaveStyle({backgroundColor: 'MediumVioletRed'})
+  expect(button).toHaveStyle({ backgroundColor: 'MediumVioletRed' })
 })
 
 test('button turns blue when clicked', () => {
   render(<App />)
-  const button = screen.getByRole('button', {name: /change to Midnight Blue/i})
+  const button = screen.getByRole('button', {
+    name: /change to Midnight Blue/i,
+  })
   fireEvent.click(button)
-  expect(button).toHaveStyle({backgroundColor: 'MidnightBlue'})
-  expect(button).toHaveTextContent(/change to Medium Violet Red/i)
+  expect(button).toHaveStyle({ backgroundColor: 'MidnightBlue' })
+  expect(button.textContent).toBe(/change to Medium Violet Red/i)
 })
 
 test('initial condition', () => {
   render(<App />)
 
   //check that the button start out enabled
-  const button = screen.getByRole('button', {name: /change to Midnight Blue/i})
+  const button = screen.getByRole('button', {
+    name: /change to Midnight Blue/i,
+  })
   expect(button).toBeEnabled()
 
   // check that the checkout starts  out unchecked
@@ -34,7 +38,7 @@ test('initial condition', () => {
   fireEvent.click(checkbox)
   expect(button).toBeDisabled()
   expect(checkbox).toBeChecked()
-  expect(button).toHaveStyle({backgroundColor: 'grey'})
+  expect(button).toHaveStyle({ backgroundColor: 'grey' })
 })
 
 describe('spaces before camel case capital letters', () => {
