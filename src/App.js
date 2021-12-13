@@ -1,27 +1,31 @@
 import React from 'react'
 
-function App() {
-  const [color, setColor] = React.useState('red')
-  const [checked, setChecked] = React.useState(false)
-  const newColor = color === 'red' ? 'blue' : 'red'
+export function replaceCamelWithSpaces(colorName) {
+  return colorName.replace(/\B([A-Z])\B/g, ' $1')
+}
 
-  function changeColor(e) {
-    setColor(newColor)
-  }
+function App() {
+  const [color, setColor] = React.useState('MediumVioletRed')
+  const [disabled, setDisabled] = React.useState(false)
+  const newColor =
+    color === 'MediumVioletRed' ? 'MidnightBlue' : 'MediumVioletRed'
+
   return (
     <div>
       <button
-        style={{backgroundColor: color}}
-        onClick={changeColor}
-        disabled={checked}
+        style={{backgroundColor: disabled ? 'grey' : color}}
+        onClick={() => setColor(newColor)}
+        disabled={disabled}
       >
-        Change to {newColor}
+        Change to {replaceCamelWithSpaces(newColor)}
       </button>
+      <br />
+      <label htmlFor="enable-button-checkbox">Disable Button</label>
       <input
         type="checkbox"
         id="enable-button-checkbox"
-        aria-checked={checked}
-        onChange={e => setChecked(e.target.checked)}
+        aria-checked={disabled}
+        onChange={e => setDisabled(e.target.checked)}
       />
     </div>
   )
